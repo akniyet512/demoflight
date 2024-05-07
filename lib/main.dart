@@ -15,13 +15,13 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   //removes # in root route
   setPathUrlStrategy();
-  //model init
-  final AppNotifier model = AppNotifier();
+  //notifier init
+  final AppNotifier notifier = AppNotifier();
 
-  await model.setData().whenComplete(() {
+  await notifier.setData().whenComplete(() {
     runApp(
       ChangeNotifierProvider(
-        create: (context) => model,
+        create: (context) => notifier,
         child: const AppWidget(),
       ),
     );

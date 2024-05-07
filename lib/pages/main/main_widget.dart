@@ -19,6 +19,9 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainNotifier notifier = context.watch<MainNotifier>();
-    return const Scaffold(backgroundColor: Colors.red);
+    return Scaffold(
+      appBar: AppBar(),
+      backgroundColor: Colors.red,
+    );
   }
 }
