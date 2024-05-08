@@ -75,7 +75,7 @@ class ApiService {
     String endpointPath,
     Map<String, dynamic> queryParams,
   ) async {
-    final apiCallFunc = () async {
+    Future<String> apiCallFunc() async {
       final valueSafeMap = <String, String>{};
       queryParams.forEach((key, value) {
         if (value != null) {
@@ -103,7 +103,7 @@ class ApiService {
       }
 
       throw (response);
-    };
+    }
 
     try {
       return checkTokenValidation(apiCallFunc);

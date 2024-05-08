@@ -11,73 +11,77 @@ abstract class MainNavigationRouteNames {
 }
 
 class AppRouter {
-  static GoRouter get router => GoRouter(
-        initialLocation: "/${MainNavigationRouteNames.search}",
-        routes: <GoRoute>[
+  static final GoRouter router = GoRouter(
+    initialLocation: "/${MainNavigationRouteNames.search}",
+    routes: <GoRoute>[
+      GoRoute(
+        path: MainNavigationRouteNames.main,
+        name: MainNavigationRouteNames.main,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const MainWidget(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+          );
+        },
+        routes: [
           GoRoute(
-            path: MainNavigationRouteNames.main,
-            name: MainNavigationRouteNames.main,
+            path: MainNavigationRouteNames.search,
+            name: MainNavigationRouteNames.search,
             pageBuilder: (context, state) {
+              final Map<String, String> queryParameters =
+                  state.uri.queryParameters;
               return CustomTransitionPage(
                 key: state.pageKey,
-                child: const MainWidget(),
+                child: SearchWidget(
+                  cityCodeFrom: queryParameters["city_code_from"],
+                  cityCodeTo: queryParameters["city_code_to"],
+                  fromDate: queryParameters["from_date"],
+                  toDate: queryParameters["to_date"],
+                  adults: queryParameters["adults"],
+                  children: queryParameters["children"],
+                  infants: queryParameters["infants"],
+                  cabinClass: queryParameters["cabin_class"],
+                  tripType: queryParameters["trip_type"],
+                ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
                   return FadeTransition(opacity: animation, child: child);
                 },
               );
             },
-            routes: [
-              GoRoute(
-                path: MainNavigationRouteNames.search,
-                name: MainNavigationRouteNames.search,
-                pageBuilder: (context, state) {
-                  final Map<String, String> queryParameters =
-                      state.uri.queryParameters;
-                  return CustomTransitionPage(
-                    key: state.pageKey,
-                    child: SearchWidget(
-                      cityCodeFrom: queryParameters["city_code_from"],
-                      cityCodeTo: queryParameters["city_code_to"],
-                      fromDate: queryParameters["from_date"],
-                      toDate: queryParameters["to_date"],
-                      adults: queryParameters["adults"],
-                      children: queryParameters["children"],
-                      infants: queryParameters["infants"],
-                      cabinClass: queryParameters["cabin_class"],
-                      tripType: queryParameters["trip_type"],
-                    ),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                  );
-                },
-              ),
-            ],
           ),
         ],
-        errorPageBuilder: (context, state) {
-          return MaterialPage(
-            child: Scaffold(
-              body: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text("Navigation error!"),
-                    ButtonWidget(
-                      text: "Go to main",
-                      onTap: () {
-                        context.pushReplacement(
-                          context.namedLocation(MainNavigationRouteNames.main),
-                        );
-                      },
-                    ),
-                  ],
+      ),
+    ],
+    errorPageBuilder: (context, state) {
+      return MaterialPage(
+        child: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  "Navigation error!",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
-              ),
+                const SizedBox(height: 8),
+                IntrinsicWidth(
+                  child: ButtonWidget(
+                    text: "Go to main",
+                    onTap: () {
+                      //TODO go to main
+                    },
+                  ),
+                ),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       );
+    },
+  );
 }

@@ -1,4 +1,5 @@
 import 'package:demoflight/pages/search/search_notifier.dart';
+import 'package:demoflight/widgets/navigation_bar/navigation_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +52,19 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SearchNotifier notifier = context.watch<SearchNotifier>();
-    return const Scaffold();
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              width: size.width * 0.8,
+              child: const NavigationBarWidget(),
+            ),
+            const Divider(),
+          ],
+        ),
+      ),
+    );
   }
 }

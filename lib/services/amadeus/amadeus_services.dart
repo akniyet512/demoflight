@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:demoflight/entities/flight_offer.dart';
 import 'package:demoflight/services/amadeus/api_services.dart';
 import 'package:demoflight/services/amadeus/remote_data.dart';
+import 'package:flutter/material.dart';
 
 class AmadeusServices {
   final AmadeusRemoteDataProvider amadeusBaseDataProvider =
@@ -44,7 +45,7 @@ class AmadeusServices {
           carriersDictionary: carriersDictionary,
         );
       } catch (e) {
-        print(e);
+        debugPrint(e.toString());
         return null;
       }
     }).toList()
