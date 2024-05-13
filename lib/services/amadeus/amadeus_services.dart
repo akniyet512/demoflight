@@ -6,7 +6,7 @@ import 'package:demoflight/services/amadeus/remote_data.dart';
 import 'package:flutter/material.dart';
 
 class AmadeusServices {
-  final AmadeusRemoteDataProvider amadeusBaseDataProvider =
+  late AmadeusRemoteDataProvider amadeusBaseDataProvider =
       AmadeusRemoteDataProvider(ApiService());
 
   Future<List<FlightOffer>> getFlightOffersSearch({

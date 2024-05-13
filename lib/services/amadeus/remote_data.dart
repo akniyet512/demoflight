@@ -39,6 +39,7 @@ class AmadeusRemoteDataProvider implements AmadeusBaseDataProvider {
     // In the test environment not all dates are available.
     return '2018-03';
   }
+  
 
   @override
   Future<String> getRawNearestAirport(

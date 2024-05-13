@@ -1,5 +1,6 @@
 import 'package:demoflight/pages/search/search_notifier.dart';
 import 'package:demoflight/widgets/navigation_bar/navigation_bar_widget.dart';
+import 'package:demoflight/widgets/search_section/search_section_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -62,6 +63,10 @@ class _Body extends StatelessWidget {
               child: const NavigationBarWidget(),
             ),
             const Divider(),
+            SizedBox(
+              width: size.width * 0.8,
+              child: const SearchSectionWidget(),
+            ),
           ],
         ),
       ),
