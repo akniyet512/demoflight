@@ -1,0 +1,6 @@
+{
+  "diffEditor.renderSideBySideInlineBreakpoint": 900,
+  "diffEditor.useInlineViewWhenSpaceIsLimited": true,
+  "editor.minimap.maxColumn": 120,
+  "editor.wordWrapColumn": 80
+}

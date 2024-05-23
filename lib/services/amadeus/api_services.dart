@@ -29,7 +29,6 @@ class ApiService {
       body:
           'grant_type=client_credentials&client_id=$_apiKey&client_secret=$_secretKey',
     );
-
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final accessToken = data['access_token'];

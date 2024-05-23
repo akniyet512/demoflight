@@ -1,7 +1,7 @@
 import 'package:demoflight/widgets/button_widget.dart';
 import 'package:demoflight/widgets/search_section/search_section_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:popover/popover.dart';
 import 'package:provider/provider.dart';
 
@@ -22,29 +22,67 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> suggestions = [
+      'Flutter',
+      'Dart',
+      'Android',
+      'iOS',
+      'Kotlin',
+      'Java',
+      'Swift',
+      'Objective-Cjhk kj hkkj kjhkjh kj',
+    ];
     SearchSectionNotifier notifier = context.watch<SearchSectionNotifier>();
     return Row(
       children: [
+        // Expanded(
+        //   child: TextField(
+        //     decoration: const InputDecoration(
+        //       hintText: "Откуда",
+        //       hintStyle: TextStyle(),
+        //       contentPadding: EdgeInsets.all(10),
+        //       filled: true,
+        //       border: OutlineInputBorder(borderRadius: BorderRadius.zero),
+        //       fillColor: Colors.transparent,
+        //       focusedBorder:
+        //           OutlineInputBorder(borderRadius: BorderRadius.zero),
+        //     ),
+        //     onChanged: (value) async => await notifier.onFromChanged(value),
+        //   ),
+        // ),
         Expanded(
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: "Откуда",
-              hintStyle: TextStyle(),
-              contentPadding: const EdgeInsets.all(10),
-              filled: true,
-              border: OutlineInputBorder(borderRadius: BorderRadius.zero),
-              fillColor: Colors.transparent,
-              focusedBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.zero),
-            ),
+          child: TypeAheadField(
+            // Configuration for the text field
+            // textFieldConfiguration: TextFieldConfiguration(
+            //   decoration: InputDecoration(labelText: 'Search'),
+            // ),
+            // Callback to fetch suggestions based on user input
+            suggestionsCallback: (pattern) async {
+              await notifier.onFromChanged(pattern);
+              return suggestions
+                  .where((suggestion) =>
+                      suggestion.toLowerCase().contains(pattern.toLowerCase()))
+                  .toList();
+            },
+
+            // Widget to build each suggestion in the list
+            itemBuilder: (context, suggestion) {
+              return ListTile(
+                title: Text(suggestion),
+              );
+            },
+            // Callback when a suggestion is selected
+            onSelected: (suggestion) {
+              print('Selected: $suggestion');
+            },
           ),
         ),
-        Expanded(
+        const Expanded(
           child: TextField(
             decoration: InputDecoration(
               hintText: "Куда",
               hintStyle: TextStyle(),
-              contentPadding: const EdgeInsets.all(10),
+              contentPadding: EdgeInsets.all(10),
               filled: true,
               border: OutlineInputBorder(borderRadius: BorderRadius.zero),
               fillColor: Colors.transparent,
@@ -57,7 +95,7 @@ class _Body extends StatelessWidget {
           child: InkWell(
             onTap: () {},
             hoverColor: Colors.transparent,
-            child: Row(
+            child: const Row(
               children: [
                 Expanded(child: Text("Дата туда")),
                 Icon(Icons.calendar_month),
@@ -69,7 +107,7 @@ class _Body extends StatelessWidget {
           child: InkWell(
             onTap: () {},
             hoverColor: Colors.transparent,
-            child: Row(
+            child: const Row(
               children: [
                 Expanded(child: Text("Дата обратно")),
                 Icon(Icons.calendar_month),
@@ -87,7 +125,7 @@ class _Body extends StatelessWidget {
                     bodyBuilder: (context) {
                       return ListView(
                         padding: const EdgeInsets.all(8),
-                        children: [
+                        children: const [
                           Text("Взрослые(+12)"),
                           Row(
                             children: [
@@ -112,8 +150,7 @@ class _Body extends StatelessWidget {
                               Icon(Icons.add_circle),
                             ],
                           ),
-                          Text(
-                              "Международные перелеты: дети с 2 до 11 лет включительно"),
+                          Text("Международные перелеты: дети с 2 до 11 лет включительно"),
                           Text("Класс"),
                           Row(
                             children: [
@@ -129,7 +166,7 @@ class _Body extends StatelessWidget {
                   );
                 },
                 hoverColor: Colors.transparent,
-                child: Row(
+                child: const Row(
                   children: [
                     Expanded(child: Text("1 взр., эконом")),
                     Icon(Icons.keyboard_arrow_down_rounded),
@@ -139,7 +176,7 @@ class _Body extends StatelessWidget {
             },
           ),
         ),
-        Expanded(
+        const Expanded(
           child: ButtonWidget(text: "Найти билеты"),
         ),
       ],

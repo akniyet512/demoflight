@@ -113,30 +113,63 @@ class _Body extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {},
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 4),
-                                child: Text("Рус"),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Center(
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/ru.png",
+                                        width: 30,
+                                      ),
+                                      const Text("Рус"),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                             InkWell(
                               onTap: () {},
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 4),
-                                child: Text("Қаз"),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Center(
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/kk.png",
+                                        width: 30,
+                                      ),
+                                      const Text("Қаз"),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                             InkWell(
                               onTap: () {},
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 4),
-                                child: Text("Eng"),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Center(
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/en.png",
+                                        width: 30,
+                                      ),
+                                      const Text("Eng"),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                         );
                       },
                       height: 102,
-                      width: 144,
+                      width: 80,
                     );
                   },
                 );
